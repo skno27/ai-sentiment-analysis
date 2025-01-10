@@ -3,6 +3,7 @@ from text_analysis import analyze
 import os
 import time
 from validate import check_profanity
+import save_prompt
 
 st.markdown(
     """
@@ -79,7 +80,8 @@ if st.button("Analyze Comment"):
 
         result = analyze(comment)
         st.session_state.comment = comment
-        st.session_state.sentiment = "Positive" if result[0] > 0.7 else "Negative"
+        print(result)
+        st.session_state.sentiment = "Positive" if result[0][0] > 0.53 else "Negative"
         st.write(f"The sentiment of the comment is: {st.session_state.sentiment}")
         st.session_state.feedback_submitted = False
 
@@ -105,14 +107,7 @@ if st.session_state.sentiment:
                 )
 
                 # save feedback/prompt block
-                """
-                file_name = f"{len(os.listdir(folder_path))}_user.txt"
-                file_path = os.path.join(folder_path, file_name)
-
-                with open(file_path, "w") as f:
-                    f.write(comment)
-                
-                """
+                save_prompt.save_to_drive(comment)
 
                 st.session_state.feedback_submitted = True
                 st.success("Thank you for your feedback")
