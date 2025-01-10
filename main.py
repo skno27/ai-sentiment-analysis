@@ -79,7 +79,7 @@ if st.button("Analyze Comment"):
 
         result = analyze(comment)
         st.session_state.comment = comment
-        st.session_state.sentiment = "Positive" if result[0] > 0.5 else "Negative"
+        st.session_state.sentiment = "Positive" if result[0] > 0.7 else "Negative"
         st.write(f"The sentiment of the comment is: {st.session_state.sentiment}")
         st.session_state.feedback_submitted = False
 
