@@ -235,7 +235,7 @@ model.compile(
 
 epochs = 50
 
-early_stopping = tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=10)
+early_stopping = tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=20)
 history = model.fit(
     train_ds, validation_data=val_ds, epochs=epochs, callbacks=[early_stopping]
 )
@@ -299,7 +299,7 @@ if not os.path.exists("accuracy.txt"):
 
     metrics = export_model.evaluate(raw_test_ds, return_dict=True)
     print("Saving Updated Model---")
-    export_model.save("SentimentBeta.keras")
+    export_model.save("SentimentBeta.keras", include_optimizer=False)
     print("Metrics:\n", metrics)
 
 
@@ -325,6 +325,6 @@ else:
 
             metrics = export_model.evaluate(raw_test_ds, return_dict=True)
             print("Saving Updated Model---")
-            export_model.save("SentimentBeta.keras")
+            export_model.save("SentimentBeta.keras", include_optimizer=False)
 
             print("Metrics:\n", metrics)

@@ -2,9 +2,6 @@ import tensorflow as tf
 import re
 import string
 
-sentiment_model = "./SentimentBeta.keras"
-loaded_model = tf.keras.models.load_model(sentiment_model)
-
 
 @tf.keras.utils.register_keras_serializable()
 def custom_standardization(input_data):
@@ -15,9 +12,15 @@ def custom_standardization(input_data):
     )
 
 
+sentiment_model = "./SentimentBeta.keras"
+loaded_model = tf.keras.models.load_model(
+    sentiment_model, custom_objects={"custom_standardization": custom_standardization}
+)
+
+
 def analyze(comment):
     if isinstance(comment, str):
-        comment = [comment]
+        comment = tf.convert_to_tensor([comment])
 
     prediction = loaded_model.predict(comment)
 
