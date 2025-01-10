@@ -1,4 +1,4 @@
 /aclimdb
 accuracy.txt
-/__pycache__
+__pycache__/
 sentiment-ai.code-workspace
