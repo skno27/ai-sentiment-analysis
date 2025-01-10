@@ -104,11 +104,15 @@ if st.session_state.sentiment:
                     else neg_folder
                 )
 
+                # save feedback/prompt block
+                """
                 file_name = f"{len(os.listdir(folder_path))}_user.txt"
                 file_path = os.path.join(folder_path, file_name)
 
                 with open(file_path, "w") as f:
                     f.write(comment)
+                
+                """
 
                 st.session_state.feedback_submitted = True
                 st.success("Thank you for your feedback")
